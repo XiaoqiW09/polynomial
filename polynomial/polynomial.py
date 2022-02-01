@@ -17,3 +17,10 @@ class Polynomial:
         terms += [f"{'' if c == 1 else c}x^{d}" 
                  for d,c in enumerate(coefs[2:],start=2) if c]
         return " + ".join(reversed(terms)) or "0"
+    def __eq__(self,other):
+        return isinstance(other,Polynomial) and\
+        self.coefficients == other.coeffients
+    def __add__(self,other):
+        common = min(self.degree(), other.degree()) + 1
+        coefs = tuple(a+b for a,b in zip(self.coefficients, other.coefficients))
+
